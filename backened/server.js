@@ -2,6 +2,8 @@ import express  from 'express';
 import mongoose from 'mongoose';
 import UserRoute from "./routes/UserRoute.js"
 import dotenv from "dotenv"
+
+import ProductRoute from "./routes/ProductRoute.js"
 dotenv.config()
 
 import cors from "cors"
@@ -22,7 +24,7 @@ app.use(cors())
 app.get( '/', ( req, res ) => {
     res.send( 'Hello World!' );
 })
-
+app.use("/api/v1" , ProductRoute )
 app.use("/api/v1" , UserRoute)
 
 

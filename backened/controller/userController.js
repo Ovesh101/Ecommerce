@@ -21,10 +21,12 @@ const register = async (req , res)=>{
 
 const login = async (req, res) => {
   // check if user exists
+  
   // check if password is correct
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) throw new Error('User is not registered');
+        console.log("user" , user);
       
         const isPasswordCorrect = await comparePassword(req.body.password , user.password);
         if (!isPasswordCorrect) throw new Error('Invalid password..');
