@@ -128,9 +128,26 @@ export const paymentGateway = async (req, res) => {
       address,
       paymentMethod,
       cartId: id ,
-      userId:userId // Manually set the cart reference
+      userId:userId
     });
     await payment.save();
+
+    const cart = await Cart.findOne({ _id: id });
+    
+    if (cart) {
+      // Set the userId to null
+      cart.userId = null;
+      await cart.save();
+      console.log('User ID removed from cart successfully.');
+    } else {
+      console.log('Cart not found.');
+    }
+
+    const user = await User.findOne({_id:userId});
+    if(user){
+      user.cartItems = []
+      await user.save();
+    }
 
     res.status(201).send({ message: 'Payment information saved successfully' });
   } catch (error) {

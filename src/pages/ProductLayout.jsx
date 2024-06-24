@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Navbar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 const ProductLayout = () => {
   const [products, setProducts] = useState([]);
@@ -106,7 +107,10 @@ const ProductLayout = () => {
           </div>
         ))}
       </div>
+      
+      <Footer />
     </div>
+    
   );
 };
 
